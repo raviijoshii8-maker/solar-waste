@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>SOLAR WASTE | Irradiated Archive · Sun-Scorched Gear</title>
+  <!-- Fonts: Sharp Technical + Monoweight -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0f120f;
+      --surface: #171c17;
+      --surface-elevated: #212821;
+      --text: #e2e6da;
+      --text-soft: #a6b39b;
+      --text-muted: #5a6b4e;
+      --accent: #e0a43a;
+      --accent-glow: #f5c15c;
+      --accent-deep: #b87d26;
+      --accent-subtle: #2a2a1c;
+      --border-light: #3b4635;
+      --shadow-sm: 0 15px 30px rgba(0, 0, 0, 0.7);
+      --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.8);
+      --glow-solar: 0 0 20px rgba(224, 164, 58, 0.5);
+      --transition: 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f9f7ef;
+      --surface: #ffffff;
+      --surface-elevated: #fffef8;
+      --text: #2e3b26;
+      --text-soft: #8f9b82;
+      --text-muted: #cfd9c2;
+      --accent: #d9942a;
+      --accent-glow: #e8b04a;
+      --accent-deep: #b87a1c;
+      --accent-subtle: #fff0df;
+      --border-light: #e5e0cf;
+      --shadow-sm: 0 12px 28px rgba(0, 0, 0, 0.03);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.06);
+      --glow-solar: 0 0 15px rgba(217, 148, 42, 0.2);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--surface-elevated); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* Header - irradiated tech */
+    .solar-header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 18, 15, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--accent);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.4);
+      transition: var(--transition);
+    }
+    [data-theme="light"] .solar-header {
+      background: rgba(249, 247, 239, 0.94);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.7rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      background: linear-gradient(125deg, var(--accent-glow) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+    }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-glow); text-shadow: 0 0 5px var(--accent); }
+
+    .utility-actions {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    #themeToggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: 0.2s;
+    }
+    .cart-count {
+      background: var(--accent);
+      color: #0f120f;
+      font-size: 0.55rem;
+      font-weight: 800;
+      border-radius: 20px;
+      width: 17px;
+      height: 17px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -8px;
+      right: -12px;
+    }
+
+    /* Hero - solar flare wasteland */
+    .hero-solar {
+      min-height: 94vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1509316975850-ff9c5f2f8f5d?q=80&w=1974&auto=format&fit=crop');
+      background-size: cover;
+      background-position: 50% 25%;
+    }
+    .hero-solar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, rgba(15,18,15,0.85) 20%, rgba(0,0,0,0.55) 85%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      padding: 0 7%;
+    }
+    .hero-sub {
+      font-size: 0.6rem;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: var(--accent-glow);
+    }
+    .hero-main-title {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(2.8rem, 6.5vw, 5rem);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .hero-offer {
+      font-size: 0.7rem;
+      font-weight: 400;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(3px);
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0f120f;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-block;
+      text-decoration: none;
+      clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 100%);
+    }
+    .btn-primary:hover {
+      background: var(--accent-glow);
+      transform: translateX(5px);
+      box-shadow: var(--glow-solar);
+    }
+
+    .section-badge {
+      max-width: 1400px;
+      margin: 5rem auto 1.5rem auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.8rem;
+    }
+    .section-badge h2 {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 500;
+      background: linear-gradient(125deg, var(--accent-glow), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Grid - irradiated industrial */
+    .waste-grid {
+      max-width: 1400px;
+      margin: 2rem auto 6rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .solar-card {
+      background: var(--surface);
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      clip-path: polygon(0% 0%, 100% 0%, 100% 96%, 96% 100%, 0% 100%);
+      overflow: hidden;
+    }
+    .solar-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: var(--glow-solar);
+    }
+    .card-media {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #111411;
+    }
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      filter: contrast(1.08) brightness(0.97);
+    }
+    .solar-card:hover .card-media img { transform: scale(1.05); filter: contrast(1); }
+    .solar-quick {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      padding: 1rem;
+      opacity: 0;
+      transition: 0.25s;
+      text-align: center;
+    }
+    .solar-card:hover .solar-quick { opacity: 1; }
+    .add-solar {
+      background: var(--accent);
+      border: none;
+      width: 85%;
+      padding: 0.65rem;
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 100%);
+      transition: 0.2s;
+      color: #0f120f;
+    }
+    .product-info-row {
+      padding: 1rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .product-category {
+      font-size: 0.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+    .product-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+    .price-solar .current { font-weight: 800; font-size: 0.95rem; color: var(--accent-glow); }
+    .price-solar .old { font-size: 0.65rem; text-decoration: line-through; color: var(--text-muted); margin-left: 0.3rem; }
+
+    /* Cart Sidebar - irradiated */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(12px);
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .cart-overlay.active { visibility: visible; opacity: 1; }
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 460px;
+      height: 100vh;
+      background: var(--surface);
+      border-left: 2px solid var(--accent);
+      transform: translateX(100%);
+      transition: transform 0.35s ease-out;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-overlay.active .cart-panel { transform: translateX(0); }
+    .cart-header {
+      padding: 1.4rem;
+      border-bottom: 1px solid var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-header h3 { font-family: 'DM Mono', monospace; font-size: 1.4rem; background: linear-gradient(125deg, var(--accent-glow), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .cart-items-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .cart-item {
+      display: flex;
+      gap: 0.9rem;
+      padding: 0.7rem;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-light);
+      clip-path: polygon(0% 0%, 100% 0%, 98% 100%, 2% 100%);
+      position: relative;
+    }
+    .cart-item-img {
+      width: 65px;
+      height: 80px;
+      object-fit: cover;
+    }
+    .cart-item-details { flex: 1; }
+    .cart-item-name { font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 500; }
+    .cart-item-price { font-size: 0.7rem; color: var(--accent-glow); font-weight: 600; margin-top: 4px; }
+    .cart-qty-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .qty-btn {
+      background: var(--accent-subtle);
+      border: none;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    .cart-remove {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 1px solid var(--accent);
+    }
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .checkout-solar {
+      width: 100%;
+      background: var(--accent);
+      border: none;
+      padding: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 100%);
+    }
+    .empty-cart-message {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      background: var(--surface-elevated);
+      margin-top: 3rem;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--accent);
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      background: linear-gradient(125deg, var(--accent-glow), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* MODAL - solar flare entry */
+    .modal-container {
+      position: fixed;
+      inset: 0;
+      z-index: 2100;
+      background: rgba(0, 0, 0, 0.96);
+      backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
+    }
+    .solar-modal {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      max-width: 460px;
+      width: 90%;
+      padding: 2rem;
+      text-align: center;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 92%, 94% 100%, 0% 100%);
+      box-shadow: 0 0 40px rgba(224, 164, 58, 0.6);
+    }
+    .modal-icon {
+      font-size: 2.5rem;
+      color: var(--accent-glow);
+      margin-bottom: 0.8rem;
+    }
+    .solar-modal h2 {
+      font-family: 'DM Mono', monospace;
+      font-size: 2rem;
+      font-weight: 500;
+      background: linear-gradient(125deg, var(--accent-glow), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent);
+      padding: 0.7rem 1.6rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text);
+      margin-left: 0.6rem;
+      clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 100%);
+    }
+    .fade-out-modal { opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    @media (max-width: 700px) {
+      .nav-container { padding: 0.7rem 1rem; }
+      .waste-grid { gap: 1.2rem; padding: 0 1rem; }
+    }
+  </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SBJZ7C7VV0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SBJZ7C7VV0');
+</script>
+    
+</head>
+<body>
+
+<!-- ENTRY MODAL SOLAR WASTE -->
+<div id="entryModal" class="modal-container">
+  <div class="solar-modal">
+    <div class="modal-icon"><i class="fa-solid fa-sun-bright"></i></div>
+    <h2>SOLAR WASTE</h2>
+    <p style="color: var(--text-soft); margin: 0.8rem 0 1.4rem;">Irradiated archive. Sun-scorched survival. Enter the flare zone.</p>
+    <div style="display: flex; gap: 0.8rem; justify-content: center;">
+      <button id="enterBtn" class="btn-primary" style="padding: 0.7rem 1.8rem;">ENTER WASTE</button>
+      <button id="laterBtn" class="btn-outline">LATER</button>
+    </div>
+    <button id="closeModalBtn" style="position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer;">✕</button>
+  </div>
+</div>
+
+<header class="solar-header">
+  <div class="nav-container">
+    <div class="brand">SOLAR WASTE</div>
+    <nav class="nav-links">
+      <a href="#shop">ARCHIVE</a>
+      <a href="#shop">RADIATION</a>
+      <a href="#shop">SURVIVAL</a>
+      <a href="#">ZONE</a>
+    </nav>
+    <div class="utility-actions">
+      <button id="themeToggle">🌙</button>
+      <div class="cart-icon" id="cartIcon">
+        <i class="fa-solid fa-radiation"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero-solar">
+    <div class="hero-content">
+      <div class="hero-sub">SS27 · FLARE SEASON</div>
+      <h1 class="hero-main-title">SOLAR WASTE</h1>
+      <div class="hero-offer">☀️ First Contact: 25% off + Irradiated patch</div>
+      <a href="#shop" class="btn-primary">DISCOVER RELICS →</a>
+    </div>
+  </section>
+
+  <div class="section-badge" id="shop">
+    <h2>⚡ Irradiated Archive Vol.1</h2>
+    <p>13 sun-scorched pieces · post-flare technical</p>
+  </div>
+
+  <div class="waste-grid" id="productGrid"></div>
+</main>
+
+<footer>
+  <div class="footer-brand">SOLAR WASTE</div>
+  <p style="font-size: 0.55rem; letter-spacing: 2px; margin-top: 0.8rem; color: var(--text-muted);">IRRADIATED · ZONE 404 · SUN-DRENCHED GEAR</p>
+  <p style="font-size: 0.5rem; margin-top: 1rem;">© 2026 Solar Waste — endure the flare</p>
+</footer>
+
+<div id="cartOverlay" class="cart-overlay">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h3>WASTE CART</h3>
+      <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items-list" id="cartItemsContainer">
+      <div class="empty-cart-message">☀️ no irradiated gear yet. add relics.</div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="total-line"><span>total dose</span><span id="cartTotalPrice">₹0</span></div>
+      <button class="checkout-solar" id="checkoutBtn">⟡ SECURE EXTRACTION ⟡</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // SOLAR WASTE PRODUCTS — irradiated, desert-tech, sun-hardened
+  const products = [
+    { id: 1, name: "Flare Shell Jacket", category: "RADIATION OUTER", original: 14999, discountPrice: 11249, img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974&auto=format&fit=crop", alt: "flare jacket" },
+    { id: 2, name: "Solar Cargo Pants", category: "BOTTOMS", original: 8499, discountPrice: 6374, img: "https://plus.unsplash.com/premium_photo-1674828601362-afb73c907ebe?q=80&w=753&auto=format&fit=crop", alt: "solar pants" },
+    { id: 3, name: "Heatwave Hoodie", category: "LAYER", original: 6299, discountPrice: 4724, img: "https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=1974&auto=format&fit=crop", alt: "heatwave hoodie" },
+    { id: 4, name: "Scorch Vest", category: "TACTICAL", original: 9999, discountPrice: 7499, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop", alt: "scorch vest" },
+    { id: 5, name: "Dune Mirage Sweater", category: "KNIT", original: 7699, discountPrice: 5774, img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=764&auto=format&fit=crop", alt: "dune sweater" },
+    { id: 6, name: "Wasteland Tech Vest", category: "CARRIER", original: 8999, discountPrice: 6749, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop", alt: "tech vest" },
+    { id: 7, name: "Cinder Drift Trousers", category: "BOTTOMS", original: 7999, discountPrice: 5999, img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=600&auto=format&fit=crop", alt: "cinder trousers" },
+    { id: 8, name: "Sun Scorch Parka", category: "OUTER", original: 18999, discountPrice: 14249, img: "https://plus.unsplash.com/premium_photo-1697183202151-61c617d21969?q=80&w=687&auto=format&fit=crop", alt: "sun parka" },
+    { id: 9, name: "Radiation Tee", category: "TOPS", original: 3999, discountPrice: 2999, img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1480&auto=format&fit=crop", alt: "rad tee" },
+    { id: 10, name: "Dust Storm Base Layer", category: "BASELAYER", original: 4599, discountPrice: 3449, img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=688&auto=format&fit=crop", alt: "dust base" },
+    { id: 11, name: "Solar Flare Coat", category: "OUTER", original: 21999, discountPrice: 16499, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop", alt: "flare coat" },
+    { id: 12, name: "Ash Resin Beanie", category: "ACCESSORY", original: 2999, discountPrice: 2249, img: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?q=80&w=687&auto=format&fit=crop", alt: "ash beanie" },
+    { id: 13, name: "Gauntlet of Cinders", category: "GLOVES", original: 5499, discountPrice: 4124, img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop", alt: "gauntlet" }
+  ];
+
+  let cart = [];
+
+  const cartOverlay = document.getElementById('cartOverlay');
+  const cartIcon = document.getElementById('cartIcon');
+  const closeCartBtn = document.getElementById('closeCartBtn');
+  const cartItemsContainer = document.getElementById('cartItemsContainer');
+  const cartFooter = document.getElementById('cartFooter');
+  const cartTotalSpan = document.getElementById('cartTotalPrice');
+  const cartCountSpan = document.getElementById('cartCount');
+
+  function saveCart() { localStorage.setItem('solarwaste_cart', JSON.stringify(cart)); }
+  function loadCart() { const saved = localStorage.getItem('solarwaste_cart'); if(saved) { cart = JSON.parse(saved); renderCartUI(); updateCartCount(); } }
+
+  function updateCartCount() { const total = cart.reduce((sum, i) => sum + i.quantity, 0); cartCountSpan.innerText = total; }
+
+  function renderCartUI() {
+    if(!cartItemsContainer) return;
+    if(cart.length === 0) {
+      cartItemsContainer.innerHTML = '<div class="empty-cart-message">☀️ empty waste. add irradiated gear.</div>';
+      cartFooter.style.display = 'none';
+      updateCartCount(); saveCart(); return;
+    }
+    cartFooter.style.display = 'block';
+    let html = '', total = 0;
+    cart.forEach(item => {
+      total += item.price * item.quantity;
+      html += `
+        <div class="cart-item" data-id="${item.id}">
+          <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+          <div class="cart-item-details">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</div>
+            <div class="cart-qty-control">
+              <button class="qty-btn dec-qty" data-id="${item.id}">−</button>
+              <span>${item.quantity}</span>
+              <button class="qty-btn inc-qty" data-id="${item.id}">+</button>
+            </div>
+          </div>
+          <button class="cart-remove" data-id="${item.id}"><i class="fa-regular fa-trash-alt"></i></button>
+        </div>
+      `;
+    });
+    cartItemsContainer.innerHTML = html;
+    cartTotalSpan.innerText = `₹${total.toLocaleString('en-IN')}`;
+    document.querySelectorAll('.dec-qty').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); updateQuantity(id, -1); }));
+    document.querySelectorAll('.inc-qty').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); updateQuantity(id, 1); }));
+    document.querySelectorAll('.cart-remove').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); removeFromCart(id); }));
+    updateCartCount(); saveCart();
+  }
+
+  function updateQuantity(id, delta) {
+    const idx = cart.findIndex(i => i.id === id);
+    if(idx !== -1) {
+      const newQty = cart[idx].quantity + delta;
+      if(newQty <= 0) cart.splice(idx, 1);
+      else cart[idx].quantity = newQty;
+      renderCartUI();
+    }
+  }
+  function removeFromCart(id) { cart = cart.filter(i => i.id !== id); renderCartUI(); }
+
+  function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if(!product) return;
+    const existing = cart.find(i => i.id === productId);
+    if(existing) existing.quantity += 1;
+    else cart.push({ id: product.id, name: product.name, price: product.discountPrice, quantity: 1, img: product.img });
+    renderCartUI();
+    updateCartCount();
+    const btn = document.querySelector(`.add-btn-${productId}`);
+    if(btn) { const original = btn.innerText; btn.innerText = "✓ ADDED"; setTimeout(() => btn.innerText = original, 700); }
+    cartOverlay.classList.add('active');
+  }
+
+  function renderProducts() {
+    const container = document.getElementById('productGrid');
+    if(!container) return;
+    container.innerHTML = '';
+    products.forEach(prod => {
+      const discountPercent = Math.round(((prod.original - prod.discountPrice) / prod.original) * 100);
+      const card = document.createElement('div'); card.className = 'solar-card';
+      card.innerHTML = `
+        <div class="card-media">
+          <img src="${prod.img}" alt="${prod.alt || prod.name}" loading="lazy">
+          <div class="solar-quick"><button class="add-solar add-btn-${prod.id}" data-id="${prod.id}">☀️ ADD TO WASTE</button></div>
+        </div>
+        <div class="product-info-row">
+          <div><div class="product-category">${prod.category}</div><div class="product-title">${prod.name}</div></div>
+          <div class="price-solar"><span class="current">₹${prod.discountPrice.toLocaleString('en-IN')}</span><span class="old">₹${prod.original.toLocaleString('en-IN')}</span><div style="font-size:0.55rem; text-align:right; color:var(--accent);">-${discountPercent}%</div></div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+    document.querySelectorAll('.add-solar').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); addToCart(parseInt(btn.dataset.id)); }));
+  }
+
+  // THEME
+  function initTheme() { const stored = localStorage.getItem('solarTheme'); const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches; let theme = stored || (systemDark ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', theme); const toggle = document.getElementById('themeToggle'); if(toggle) toggle.textContent = theme === 'dark' ? '☀️' : '🌙'; }
+  function toggleTheme() { const curr = document.getAttribute('data-theme'); const next = curr === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', next); localStorage.setItem('solarTheme', next); const toggle = document.getElementById('themeToggle'); if(toggle) toggle.textContent = next === 'dark' ? '☀️' : '🌙'; }
+
+  // MODAL LOGIC
+  const modalDiv = document.getElementById('entryModal');
+  const enterBtn = document.getElementById('enterBtn'), laterBtn = document.getElementById('laterBtn'), closeX = document.getElementById('closeModalBtn');
+  function closeModalFunc() { if(modalDiv){ modalDiv.classList.add('fade-out-modal'); setTimeout(()=> modalDiv.style.display='none', 220); } }
+  if(enterBtn) enterBtn.addEventListener('click', closeModalFunc);
+  if(laterBtn) laterBtn.addEventListener('click', closeModalFunc);
+  if(closeX) closeX.addEventListener('click', closeModalFunc);
+  if(modalDiv) modalDiv.addEventListener('click',(e)=>{ if(e.target === modalDiv) closeModalFunc(); });
+
+  // CART events
+  if(cartIcon) cartIcon.addEventListener('click', ()=> cartOverlay.classList.add('active'));
+  if(closeCartBtn) closeCartBtn.addEventListener('click', ()=> cartOverlay.classList.remove('active'));
+  if(cartOverlay) cartOverlay.addEventListener('click', (e) => { if(e.target === cartOverlay) cartOverlay.classList.remove('active'); });
+  document.getElementById('checkoutBtn')?.addEventListener('click', () => { alert('☀️ SOLAR WASTE: Your irradiated gear is secured. Endure the flare.'); cart = []; renderCartUI(); cartOverlay.classList.remove('active'); });
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { const href = this.getAttribute('href'); if(href && href !== '#') { const target = document.querySelector(href); if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } } }); });
+
+  renderProducts(); initTheme(); loadCart(); document.getElementById('themeToggle')?.addEventListener('click', toggleTheme);
+</script>
+</body>
+</html>
